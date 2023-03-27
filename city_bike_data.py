@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class CityBikeData:
@@ -38,10 +39,17 @@ class CityBikeData:
     def most_popular_station_start(self):
         return self.df["start_station_name"].value_counts()[0]
 
-    def most_popular_station_start(self):
+    def most_popular_station_end(self):
         return self.df["end_station_name"].value_counts()[0]
 
 
 if __name__ == "__main__":
-    JC = CityBikeData("JC-202302.csv")
-    JC.clean()
+    jc = CityBikeData("JC-202302.csv")
+    jc.clean()
+    df = jc.df
+    hours = df["started_at"].dt.hour
+    plt.hist(hours, bins=24, edgecolor="black")
+    plt.xticks(range(0, 24), range(0, 24))
+    plt.xlabel("Heure de la journée")
+    plt.ylabel("Nombre de locations")
+    plt.show()
