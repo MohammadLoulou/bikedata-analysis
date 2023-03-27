@@ -1,6 +1,8 @@
 from city_bike_data import CityBikeData
+from generate_graph import GenerateGraph
 
 JC = CityBikeData("JC-202302.csv")
-JC.clean()
+# JC = GenerateGraph()
 
-print(JC.rides_number("classic"))
+if __name__ == "__main__":
+    JC.generate()
