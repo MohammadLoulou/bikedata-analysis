@@ -3,14 +3,23 @@ import pandas as pd
 
 class CityBikeData:
     def __init__(self, filename):
-        self.df = pd.read_csv(filename)
+        try:
+            self.df = pd.read_csv(filename)
+        except Exception as e:
+            print("Don't find the file")
 
     def generate(self):
         dict_infos = {}
         self.clean()
-        # dict_infos["number_ride"] = self.rides_number(self.df)
+        dict_infos["classic_ride"] = self.rides_number("classic")
+        dict_infos["electric_ride"] = self.rides_number("electric")
+        dict_infos["docked_ride"] = self.rides_number("docked")
+        dict_infos["total_ride"] = self.rides_number("total")
         dict_infos["average"] = self.average_duration()
-        dict_infos["most_popular_station_start"] = self.most_popular_station_start()
+        dict_infos["most_popular_station_start"] = self.start_station_id()[0]
+        dict_infos["most_popular_station_end"] = self.end_station_id()[0]
+        dict_infos["members"] = self.number_members()["member"]
+        dict_infos["casual"] = self.number_members()["casual"]
 
         return dict_infos
 
@@ -26,22 +35,23 @@ class CityBikeData:
         elif "electric" in bike_type:
             return count["electric_bike"]
         elif "docked" in bike_type:
-            return count["docked_bikes"]
+            return count["docked_bike"]
         elif "total" in bike_type:
-            return self.df["rideable_types"].count()
+            return self.df["rideable_type"].count()
 
     def average_duration(self):
         self.df["duration"] = self.df["ended_at"] - self.df["started_at"]
         average = self.df["duration"].mean()
         return average
 
-    def most_popular_station_start(self):
-        return self.df["start_station_name"].value_counts()[0]
+    def start_station_id(self):
+        dataframe = self.df["start_station_name"].value_counts()
+        return dataframe
 
-    def most_popular_station_start(self):
-        return self.df["end_station_name"].value_counts()[0]
+    def end_station_id(self):
+        dataframe = self.df["end_station_name"].value_counts()
+        return dataframe
 
-
-if __name__ == "__main__":
-    JC = CityBikeData("JC-202302.csv")
-    JC.clean()
+    def number_members(self):
+        members = self.df["member_casual"].value_counts()
+        return members
