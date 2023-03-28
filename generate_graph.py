@@ -32,7 +32,7 @@ class GraphGenerator:
         return plt
 
     def most_popular_stations_graph(self):
-        pop = self.city_bike.most_popular_stations_start()
+        pop = self.city_bike.popular_start_stations()
         pop.plot(kind="bar", legend="popular stations")
 
     def rideable_type_graph(self):
