@@ -53,18 +53,15 @@ class CityBikeData:
         dataframe = self.df["end_station_name"].value_counts()
         return dataframe
 
-    def most_popular_stations_start(self):
+    def popular_start_stations(self):
         return self.df["start_station_id"].value_counts().head(10)
 
-    def most_popular_stations_end(self):
+    def popular_end_stations(self):
         return self.df["end_station_id"].value_counts().head(10)
 
     def number_members(self):
         members = self.df["member_casual"].value_counts()
         return members
-
-    def popular_stations(self):
-        pass
 
 
 if __name__ == "__main__":

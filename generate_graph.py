@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-class GenerateGraph:
+class GraphGenerator:
     def __init__(self):
         self.city_bike = CityBikeData("JC-202302.csv")
 
@@ -39,7 +39,7 @@ class GenerateGraph:
         return plt
 
     def most_popular_stations_graph(self):
-        pop = self.city_bike.most_popular_stations_start()
+        pop = self.city_bike.popular_start_stations()
         pop.plot(kind="bar", legend="popular stations")
 
     def rideable_type_graph(self):
