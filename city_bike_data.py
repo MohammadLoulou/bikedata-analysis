@@ -7,7 +7,7 @@ class CityBikeData:
         try:
             self.df = pd.read_csv(filename)
         except Exception as e:
-            print("Don't find the file")
+            print("File not found")
 
     def generate(self):
         dict_infos = {}
@@ -53,21 +53,21 @@ class CityBikeData:
         dataframe = self.df["end_station_name"].value_counts()
         return dataframe
 
-    def most_popular_station_end(self):
-        return self.df["end_station_name"].value_counts()[0]
+    def most_popular_stations_start(self):
+        return self.df["start_station_id"].value_counts().head(10)
+
+    def most_popular_stations_end(self):
+        return self.df["end_station_id"].value_counts().head(10)
 
     def number_members(self):
         members = self.df["member_casual"].value_counts()
         return members
+
+    def popular_stations(self):
+        pass
 
 
 if __name__ == "__main__":
     jc = CityBikeData("JC-202302.csv")
     jc.clean()
     df = jc.df
-    hours = df["started_at"].dt.hour
-    plt.hist(hours, bins=24, edgecolor="black")
-    plt.xticks(range(0, 24), range(0, 24))
-    plt.xlabel("Heure de la journée")
-    plt.ylabel("Nombre de locations")
-    plt.show()
