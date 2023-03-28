@@ -2,7 +2,7 @@ from city_bike_data import CityBikeData
 import matplotlib.pyplot as plt
 
 
-class GenerateGraph:
+class GraphGenerator:
     def __init__(self):
         self.city_bike = CityBikeData("JC-202302.csv")
 
@@ -34,3 +34,7 @@ class GenerateGraph:
     def most_popular_stations_graph(self):
         pop = self.city_bike.most_popular_stations_start()
         pop.plot(kind="bar", legend="popular stations")
+
+    def rideable_type_graph(self):
+        rideable_type = self.city_bike.df["rideable_type"].value_counts()
+        rideable_type.plot(kind="pie", autopct="%1.1f%%", startangle=90, ylabel="")
