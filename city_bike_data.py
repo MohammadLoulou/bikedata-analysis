@@ -44,6 +44,12 @@ class CityBikeData:
         elif "total" in bike_type:
             return self.df["rideable_type"].count()
 
+    def most_used_time_slots(self):
+        hours = self.df["started_at"].dt.hour
+        hours_counts = hours.value_counts()
+        hours_counts.sort_values()
+        return hours_counts.idxmax()
+
     def average_duration(self):
         self.df["duration"] = self.df["ended_at"] - self.df["started_at"]
         average = self.df["duration"].mean()

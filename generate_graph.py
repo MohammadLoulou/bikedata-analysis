@@ -13,6 +13,7 @@ class GraphGenerator:
     def generate(self):
         self.city_bike.generate()
         self.member_or_casual_graph()
+        self.member_or_casual_graph()
         self.rideable_type_graph()
         self.rides_per_day_of_week_graph()
         self.hourly_rides_graph()
@@ -32,6 +33,7 @@ class GraphGenerator:
     def most_popular_stations_graph(self):
         pop = self.df["start_station_id"].value_counts().head(10)
         plt.figure()
+        plt.figure()
         pop.plot(kind="bar", legend="popular stations")
         plt.xlabel("Station's name")
         plt.ylabel("Number of rides")
@@ -40,11 +42,13 @@ class GraphGenerator:
         plt.savefig(f"{self.city}_most_popular_stations.png")
 
     def rideable_type_graph(self):
+        plt.figure()  # create new figure
         rideable_type = self.df["rideable_type"].value_counts()
         rideable_type.plot(
             kind="pie", title="rideable_type", autopct="%1.1f%%", ylabel=""
         )
         plt.tight_layout()
+        plt.savefig(f"{self.city}_rideable_type_graph.png")
         plt.savefig(f"{self.city}_rideable_type_graph.png")
 
     def member_or_casual_graph(self):
@@ -64,7 +68,7 @@ class GraphGenerator:
         self.df["day_of_week"] = self.df["started_at"].dt.dayofweek
         rides_per_day_of_week = self.df.groupby("day_of_week")["ride_id"].count()
 
-        plt.figure()
+        fig = plt.figure("figure3")
         rides_per_day_of_week.sort_index().plot(kind="bar")
         plt.xlabel("Day_of_week")
         plt.ylabel("Total Rides")
@@ -81,11 +85,13 @@ class GraphGenerator:
                 "Sunday",
             ],
         )
+
         plt.title(f"Total Rides per Day_of_week in {self.city}")
         plt.tight_layout()
         plt.savefig(f"{self.city}_total_rides_per_day_of_week.png")
 
     def user_type_ride_duration_graph(self):
+        ride_duration = self.df.groupby("member_casual")["ride_duration"].mean()
         ride_duration = self.df.groupby("member_casual")["ride_duration"].mean()
 
         plt.figure()
