@@ -1,17 +1,16 @@
 from city_bike_data import CityBikeData
 from generate_graph import GraphGenerator
 from jinja2 import Environment, FileSystemLoader
+import pandas as pd
 
 
-jc = CityBikeData("JC-202302.csv")
-
-# JC = CityBikeData("JC-202302.csv")
-gg = GraphGenerator()
+jc = CityBikeData("JC-202302.csv", "jersey_city")
+gg = GraphGenerator("jersey_city")
 
 if __name__ == "__main__":
-    # gg.generate()
-    dic = jc.generate()
 
+    dic = jc.generate()
+    gg.generate()
     environment = Environment(loader=FileSystemLoader("templates/"))
     template = environment.get_template("template.html")
 

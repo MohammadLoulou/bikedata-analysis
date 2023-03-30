@@ -2,14 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>City bike data report</title>
+    <meta charset="UTF-8">
+    <title>{{ city }} Bike Share Analysis Report</title>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Number of classic rides : {{ classic_ride }} </h1>
-    <p></p>
-
+    <h1>{{ city }} Bike Share Analysis Report</h1>
+    <h2>Average Ride Duration per User Type</h2>
+    <img src="{{ city }}_average_ride_duration_user_type.png" alt="Average Ride Duration per User Type">
+    <h2>Total Rides per Weekday</h2>
+    <img src="{{ city }}_total_rides_per_day_of_week.png" alt="Total Rides per Weekday">
+    <h2>Most Popular Start Stations</h2>
+    <img src="{{ city }}_most_popular_stations.png" alt="Most Popular Stations">
 </body>
 
 </html>

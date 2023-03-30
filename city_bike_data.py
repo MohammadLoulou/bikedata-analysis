@@ -3,15 +3,17 @@ import matplotlib.pyplot as plt
 
 
 class CityBikeData:
-    def __init__(self, filename):
+    def __init__(self, filename, city):
         try:
             self.df = pd.read_csv(filename)
         except Exception as e:
             print("File not found")
+        self.city = city
+        self.clean()
 
     def generate(self):
         dict_infos = {}
-        self.clean()
+        dict_infos["city"] = self.city
         dict_infos["classic_ride"] = self.rides_number("classic")
         dict_infos["electric_ride"] = self.rides_number("electric")
         dict_infos["docked_ride"] = self.rides_number("docked")
@@ -53,11 +55,10 @@ class CityBikeData:
         dataframe = self.df["end_station_name"].value_counts()
         return dataframe
 
-    def popular_start_stations(self):
-        return self.df["start_station_id"].value_counts().head(10)
-
-    def popular_end_stations(self):
-        return self.df["end_station_id"].value_counts().head(10)
+    def most_popular_stations(self):
+        start_station = self.data["start_station_name"].value_counts().idxmax()
+        end_station = self.data["end_station_name"].value_counts().idxmax()
+        return start_station, end_station
 
     def number_members(self):
         members = self.df["member_casual"].value_counts()
@@ -66,5 +67,4 @@ class CityBikeData:
 
 if __name__ == "__main__":
     jc = CityBikeData("JC-202302.csv")
-    jc.clean()
     df = jc.df
