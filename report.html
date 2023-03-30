@@ -3,8 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jersey_city Bike Share Analysis Report</title>
     <style>
         img {
@@ -13,17 +11,63 @@
             margin-right: auto;
             max-width: 100%;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #333;
+        }
     </style>
 </head>
 
 <body>
     <h1>jersey_city Bike Share Analysis Report</h1>
+
+    <h2>Ride Types</h2>
+    <p>Number of Classic Rides: 39913</p>
+    <p>Number of Electric Rides: 11059</p>
+    <p>Total Rides: 51069</p>
+
+    <h2>Average Ride Duration</h2>
+    <p>Average Ride Duration: 0 days 00:08:46.967494957 minutes</p>
+
+    <h2>Most Popular Stations</h2>
+    <p>Most Popular Start Station: Grove St PATH</p>
+    <p>Most Popular End Station: Grove St PATH</p>
+
+    <h2>User Types</h2>
+    <p>Number of Casual Users: 10084</p>
+    <p>Number of Members: 40985</p>
+
+
+
     <h2>Average Ride Duration per User Type</h2>
     <img src="jersey_city_average_ride_duration_user_type.png" alt="Average Ride Duration per User Type">
     <h2>Total Rides per Weekday</h2>
     <img src="jersey_city_total_rides_per_day_of_week.png" alt="Total Rides per Weekday">
     <h2>Most Popular Start Stations</h2>
     <img src="jersey_city_most_popular_stations.png" alt="Most Popular Stations">
+    <h2>Rideable type by user category</h2>
+    <img src="jersey_city_rideable_type_by_user_category.png" alt="Rideable type by user category">
+    <h2>Time slots for bike use </h2>
+    <img src="jersey_city_hourly_rides.png" alt="Hourly rides">
+    <h2>Rideable type use</h2>
+    <img src="jersey_city_rideable_type_graph.png" alt="rideable type graph">
 </body>
 
 </html>

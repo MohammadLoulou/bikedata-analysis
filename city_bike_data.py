@@ -14,21 +14,23 @@ class CityBikeData:
     def generate(self):
         dict_infos = {}
         dict_infos["city"] = self.city
-        dict_infos["classic_ride"] = self.rides_number("classic")
-        dict_infos["electric_ride"] = self.rides_number("electric")
-        dict_infos["docked_ride"] = self.rides_number("docked")
-        dict_infos["total_ride"] = self.rides_number("total")
-        dict_infos["average"] = self.average_duration()
-        dict_infos["most_popular_station_start"] = self.start_station_id()[0]
-        dict_infos["most_popular_station_end"] = self.end_station_id()[0]
-        dict_infos["members"] = self.number_members()["member"]
-        dict_infos["casual"] = self.number_members()["casual"]
+        dict_infos["classic_rides_number"] = self.rides_number("classic")
+        dict_infos["electric_rides_number"] = self.rides_number("electric")
+        dict_infos["total_rides_number"] = self.rides_number("total")
+        dict_infos["average_rides_duration"] = self.average_duration()
+        dict_infos["most_popular_station_start"] = self.start_station_name().idxmax()
+        dict_infos["most_popular_station_end"] = self.end_station_name().idxmax()
+        dict_infos["members_number"] = self.number_members()["member"]
+        dict_infos["casual_users_number"] = self.number_members()["casual"]
 
         return dict_infos
 
     def clean(self):
         self.df["started_at"] = pd.to_datetime(self.df["started_at"])
         self.df["ended_at"] = pd.to_datetime(self.df["ended_at"])
+        self.df["ride_duration"] = (
+            self.df["ended_at"] - self.df["started_at"]
+        ).dt.total_seconds() / 60
         self.df.dropna(inplace=True)
 
     def rides_number(self, bike_type="total"):
@@ -47,11 +49,11 @@ class CityBikeData:
         average = self.df["duration"].mean()
         return average
 
-    def start_station_id(self):
+    def start_station_name(self):
         dataframe = self.df["start_station_name"].value_counts()
         return dataframe
 
-    def end_station_id(self):
+    def end_station_name(self):
         dataframe = self.df["end_station_name"].value_counts()
         return dataframe
 
@@ -63,8 +65,3 @@ class CityBikeData:
     def number_members(self):
         members = self.df["member_casual"].value_counts()
         return members
-
-
-if __name__ == "__main__":
-    jc = CityBikeData("JC-202302.csv")
-    df = jc.df

@@ -6,16 +6,13 @@ import pandas as pd
 
 jc = CityBikeData("JC-202302.csv", "jersey_city")
 gg = GraphGenerator("jersey_city")
+dic = jc.generate()
+gg.generate()
+environment = Environment(loader=FileSystemLoader("templates/"))
+template = environment.get_template("template.html")
 
-if __name__ == "__main__":
-
-    dic = jc.generate()
-    gg.generate()
-    environment = Environment(loader=FileSystemLoader("templates/"))
-    template = environment.get_template("template.html")
-
-    filename = "report.html"
-    context = dic
-    with open(filename, mode="w", encoding="utf-8") as results:
-        results.write(template.render(context))
-        print(f"... wrote {filename}")
+filename = "report.html"
+context = dic
+with open(filename, mode="w", encoding="utf-8") as results:
+    results.write(template.render(context))
+    print(f"... wrote {filename}")

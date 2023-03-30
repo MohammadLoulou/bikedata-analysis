@@ -11,17 +11,63 @@
             margin-right: auto;
             max-width: 100%;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #333;
+        }
     </style>
 </head>
 
 <body>
     <h1>{{ city }} Bike Share Analysis Report</h1>
+
+    <h2>Ride Types</h2>
+    <p>Number of Classic Rides: {{ classic_rides_number }}</p>
+    <p>Number of Electric Rides: {{ electric_rides_number }}</p>
+    <p>Total Rides: {{ total_rides_number }}</p>
+
+    <h2>Average Ride Duration</h2>
+    <p>Average Ride Duration: {{ average_rides_duration }} minutes</p>
+
+    <h2>Most Popular Stations</h2>
+    <p>Most Popular Start Station: {{ most_popular_station_start }}</p>
+    <p>Most Popular End Station: {{ most_popular_station_end }}</p>
+
+    <h2>User Types</h2>
+    <p>Number of Casual Users: {{ casual_users_number }}</p>
+    <p>Number of Members: {{ members_number }}</p>
+
+
+
     <h2>Average Ride Duration per User Type</h2>
     <img src="{{ city }}_average_ride_duration_user_type.png" alt="Average Ride Duration per User Type">
     <h2>Total Rides per Weekday</h2>
     <img src="{{ city }}_total_rides_per_day_of_week.png" alt="Total Rides per Weekday">
     <h2>Most Popular Start Stations</h2>
     <img src="{{ city }}_most_popular_stations.png" alt="Most Popular Stations">
+    <h2>Rideable type by user category</h2>
+    <img src="{{ city }}_rideable_type_by_user_category.png" alt="Rideable type by user category">
+    <h2>Time slots for bike use </h2>
+    <img src="{{ city }}_hourly_rides.png" alt="Hourly rides">
+    <h2>Rideable type use</h2>
+    <img src="{{ city }}_rideable_type_graph.png" alt="rideable type graph">
 </body>
 
 </html>
